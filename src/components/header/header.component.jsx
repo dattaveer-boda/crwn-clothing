@@ -12,6 +12,9 @@ const Header = ({ currentUser }) => (
       <Logo className="logo" />
     </Link>
     <div className="options">
+      <h3 className="option">
+        {currentUser ? "Hello " + currentUser.displayName + "!" : ""}
+      </h3>
       <Link className="option" to="/shop">
         SHOP
       </Link>
