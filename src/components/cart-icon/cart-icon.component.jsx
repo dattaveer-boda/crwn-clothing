@@ -14,12 +14,16 @@ const CartIcon = (props) => (
   </div>
 );
 
-const mapStatetoProps = (state) => ({
-  cartItemsCount: selectCartItemCount(state),
-});
+// => ({}) means return an object
+// same as => { return {} }
+const mapStateToProps = (state) => {
+  return {
+    cartItemsCount: selectCartItemCount(state),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   toggleCartHidden: () => dispatch(toggleCartHidden()),
 });
 
-export default connect(mapStatetoProps, mapDispatchToProps)(CartIcon);
+export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
