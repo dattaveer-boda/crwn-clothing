@@ -56,6 +56,9 @@ class SignIn extends React.Component {
           />
           <div className="buttons">
             <CustomButton type="submit">Sign In</CustomButton>
+            {/* After Hosting the app, you need to add that custom domain to firebase,
+            open firebase console and in authentication section add it to authorized domains
+            then sign in with google will work */}
             <CustomButton
               type="button"
               onClick={singInWithGoogle}
