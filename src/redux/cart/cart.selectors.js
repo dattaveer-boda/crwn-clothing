@@ -1,3 +1,10 @@
+// A library for creating memoized "selector" functions. Commonly used with Redux,
+// but usable with any plain JS immutable data as well.
+
+// Selectors can compute derived data, allowing Redux to store the minimal possible state.
+// Selectors are efficient. A selector is not recomputed unless one of its arguments changes.
+// Selectors are composable. They can be used as input to other selectors.
+
 import { createSelector } from "reselect";
 
 // using 'reselect' library for memorizing the specific state

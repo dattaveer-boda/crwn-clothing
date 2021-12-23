@@ -21,6 +21,7 @@ const CheckoutItem = (props) => (
         &#10094;
       </div>
       <span className="value">{props.item.quantity}</span>
+      {/* html dingbats for html symbols */}
       <div
         className="arrow"
         onClick={() => props.changeItemQuantity(props.item, "increment")}
