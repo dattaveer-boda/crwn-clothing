@@ -1,45 +1,44 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import { auth } from "../../firebase/firebase.utils";
 
-import "./header.styles.scss";
+import {
+  HeaderContainer,
+  OptionsContainer,
+  LogoContainer,
+  DivOption,
+  LinkOption,
+  H3Option,
+} from "./header.styles";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { selectIsCartHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 
-const Header = ({ currentUser, isCartHidden }) => (
-  <div className="header">
-    <Link to="/" className="logo-container">
+const Header = ({ currentUser, isCartHidden, history }) => (
+  <HeaderContainer>
+    <LogoContainer to="/">
       <Logo className="logo" />
-    </Link>
-    <div className="options">
-      <h3 className="option">
+    </LogoContainer>
+    <OptionsContainer>
+      <H3Option>
         {currentUser ? "Hello " + currentUser.displayName + "!" : ""}
-      </h3>
-      <Link className="option" to="/shop">
-        SHOP
-      </Link>
-      <Link className="option" to="/shop">
-        CONTACT
-      </Link>
+      </H3Option>
+      <LinkOption to="/shop">SHOP</LinkOption>
+      <LinkOption to="/shop">CONTACT</LinkOption>
       {currentUser ? (
-        <div className="option" onClick={() => auth.signOut()}>
-          SIGN OUT
-        </div>
+        <DivOption onClick={() => auth.signOut()}>SIGN OUT</DivOption>
       ) : (
-        <Link className="option" to="/signin">
-          SIGN IN
-        </Link>
+        <LinkOption to="/signin">SIGN IN</LinkOption>
       )}
       <CartIcon />
-    </div>
+    </OptionsContainer>
     {isCartHidden ? null : <CartDropdown />}
-  </div>
+  </HeaderContainer>
 );
 
 /*
@@ -58,4 +57,4 @@ const mapStateToProps = createStructuredSelector({
   isCartHidden: selectIsCartHidden,
 });
 
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header));
