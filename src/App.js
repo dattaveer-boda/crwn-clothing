@@ -9,8 +9,10 @@ import CheckoutPage from "./pages/checkout/checkout.component";
 
 import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+// import { addCollectionAndDocuments } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
+import { selectCollectionsForPreview } from "./redux/shop/shop.selector";
 
 import "./App.css";
 
@@ -30,6 +32,14 @@ class App extends React.Component {
             ...snapShot.data(),
           });
         });
+        // Below code is to programatically add collections to firestore
+        // addCollectionAndDocuments(
+        //   "collections",
+        //   this.props.collectionsArray.map(({ title, items }) => ({
+        //     title,
+        //     items,
+        //   }))
+        // );
       } else {
         setCurrentUser(null);
       }
@@ -68,6 +78,7 @@ const mapStateToProps = (state) => {
   return {
     // fetching currentUser using 'reselect' library for memorization
     currentUser: selectCurrentUser(state), //state.user.currentUser,
+    collectionsArray: selectCollectionsForPreview(state),
   };
 };
 
