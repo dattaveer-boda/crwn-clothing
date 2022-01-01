@@ -22,6 +22,8 @@ class App extends React.Component {
   componentDidMount() {
     const { setCurrentUser } = this.props;
 
+    // its kind of observable, it emits stream of events continuously
+    // whenever user login or logout, firebase will give updated state
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
